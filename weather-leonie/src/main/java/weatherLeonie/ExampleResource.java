@@ -36,6 +36,7 @@ public class ExampleResource {
     public String actualWeather(){
         JsonArrayBuilder array = Json.createArrayBuilder();
         JsonObjectBuilder object = Json.createObjectBuilder();
+        WeatherModel weather = new WeatherModel();
 
         try {
             URLConnection conn = url.openConnection();
@@ -49,12 +50,17 @@ public class ExampleResource {
                 line = br.readLine();
                 weatherArray = line.split(splitLine);
 
-                returnString = weatherArray[town]+ "\n" +
-                        "Temperatur: " + weatherArray[tempIndex] + "°C \n" +
-                        "Windgeschwindigkeit: " + weatherArray[windSpeedIndex] + "km/h \n" +
-                        "Regenmenge: " + weatherArray[rainIndex] + "l/m² \n" +
+                returnString = weatherArray[town]+ "<br> \n" +
+                        "Temperatur: " + weatherArray[tempIndex] + "°C <br> \n" +
+                        "Windgeschwindigkeit: " + weatherArray[windSpeedIndex] + "km/h <br> \n" +
+                        "Regenmenge: " + weatherArray[rainIndex] + "l/m² <br> \n" +
                         "Sonnenschein: " + weatherArray[sunIndex] + "%";
 
+                weather.setCity(weatherArray[town]);
+                weather.setTemp(weatherArray[tempIndex]);
+                weather.setWindspeed(weatherArray[windSpeedIndex]);
+                weather.setRain(weatherArray[rainIndex]);
+                weather.setSun(weatherArray[sunIndex]);
                 //System.out.println(object);
             }
 
@@ -63,6 +69,6 @@ public class ExampleResource {
         } catch (NullPointerException ex){
             System.out.println("Mistake");
         }
-        return returnString;
+        return weather.toString();
     }
 }
