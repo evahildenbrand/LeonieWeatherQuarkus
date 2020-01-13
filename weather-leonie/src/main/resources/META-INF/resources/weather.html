@@ -22,7 +22,6 @@
         type="text/javascript"
         src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"
 ></script>
-<script type="text/javascript" src="./Data.js"></script>
 
 <script>
     //Stündliche aktualisierung der Daten
@@ -46,6 +45,7 @@
     $.ajax({
         type: "GET",
         url: "http://www.zamg.ac.at/ogd/",
+        //url: "../../java/weatherLeonie/WeatherModel",
         dataType: "text",
         success: function(csv) {
             let lines = csv.split(/\r?\n|\r/);
