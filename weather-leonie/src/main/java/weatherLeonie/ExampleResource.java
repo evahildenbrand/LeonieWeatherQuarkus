@@ -29,12 +29,13 @@ public class ExampleResource {
     int rainIndex = 12;
     int sunIndex = 15;
     String[] weatherArray;
+    String returnString = "";
 
     public ExampleResource() throws MalformedURLException {
     }
 
     @GET
-    public Response actualWeather(){
+    public String actualWeather(){
         JsonArrayBuilder array = Json.createArrayBuilder();
         JsonObjectBuilder object = Json.createObjectBuilder();
 
@@ -56,6 +57,12 @@ public class ExampleResource {
                 object.add("Regenmenge", weatherArray[rainIndex] + " l/m²");
                 object.add("Sonnenschein", weatherArray[sunIndex] + " %");
 
+                returnString = weatherArray[town]+ "\n" +
+                        "Temperatur: " + weatherArray[tempIndex] + "°C \n" +
+                        "Windgeschwindigkeit: " + weatherArray[windSpeedIndex] + "km/h \n" +
+                        "Regenmenge: " + weatherArray[rainIndex] + "l/m² \n" +
+                        "Sonnenschein: " + weatherArray[sunIndex] + "%";
+
                 array.add(object);
 
                 System.out.println(object);
@@ -66,6 +73,6 @@ public class ExampleResource {
         } catch (NullPointerException ex){
             System.out.println("Mistake");
         }
-        return Response.ok().build();
+        return returnString;
     }
 }
