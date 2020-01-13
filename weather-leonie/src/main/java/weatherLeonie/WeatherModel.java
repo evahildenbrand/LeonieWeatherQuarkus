@@ -57,4 +57,13 @@ public class WeatherModel {
     public void setSun(String sun) {
         this.sun = sun;
     }
+
+    @Override
+    public String toString() {
+        return city + '\n' +
+                "Temperatur: " + temp + '\n' +
+                "Windgeschwindigkeit: " + windspeed + " km/h \n" +
+                "Regenmenge: " + rain + " l/m² \n" +
+                "Sonnenschein: " + sun + " %";
+    }
 }
