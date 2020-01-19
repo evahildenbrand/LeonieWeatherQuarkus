@@ -60,10 +60,10 @@ public class ExampleResource {
                         "Sonnenschein: " + weatherArray[sunIndex] + "%";
 
                 weather.setCity(weatherArray[town]);
-                weather.setTemp(weatherArray[tempIndex]);
-                weather.setWindspeed(weatherArray[windSpeedIndex]);
-                weather.setRain(weatherArray[rainIndex]);
-                weather.setSun(weatherArray[sunIndex]);
+                weather.setTemp(weatherArray[tempIndex] + " °C");
+                weather.setWindspeed(weatherArray[windSpeedIndex] + " km/h");
+                weather.setRain(weatherArray[rainIndex] + " l/m²");
+                weather.setSun(weatherArray[sunIndex] + " %");
                 //System.out.println(object);
             }
 
