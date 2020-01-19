@@ -38,9 +38,7 @@ public class ExampleResource {
     }
 
     @GET
-    public String actualWeather(){
-        JsonArrayBuilder array = Json.createArrayBuilder();
-        JsonObjectBuilder object = Json.createObjectBuilder();
+    public Response actualWeather(){
         WeatherModel weather = new WeatherModel();
 
         try {
@@ -74,6 +72,6 @@ public class ExampleResource {
         } catch (NullPointerException ex){
             System.out.println("Mistake");
         }
-        return weather.toString();
+        return Response.ok(weather).build();
     }
 }
