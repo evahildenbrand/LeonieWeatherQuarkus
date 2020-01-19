@@ -61,7 +61,7 @@ public class WeatherModel {
     @Override
     public String toString() {
         return city + '\n' +
-                "Temperatur: " + temp + '\n' +
+                "Temperatur: " + temp + " °C \n" +
                 "Windgeschwindigkeit: " + windspeed + " km/h \n" +
                 "Regenmenge: " + rain + " l/m² \n" +
                 "Sonnenschein: " + sun + " %";
