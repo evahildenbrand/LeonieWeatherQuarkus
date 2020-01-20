@@ -40,6 +40,7 @@ public class ExampleResource {
     @GET
     public Response actualWeather(){
         WeatherModel weather = new WeatherModel();
+        searchTown = true;
 
         try {
             URLConnection conn = url.openConnection();
