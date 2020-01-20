@@ -85,7 +85,7 @@ public class ExampleResource {
 
                 if(weatherArray[town].equals("\"Linz/Hörsching\"")){
                     searchTown = false;
-                    weather.setCity(weatherArray[town]);
+                    weather.setCity(weatherArray[town].replace("\"",""));
                     weather.setTemp(weatherArray[tempIndex] + " °C");
                     weather.setWindspeed(weatherArray[windSpeedIndex] + " km/h");
                     weather.setRain(weatherArray[rainIndex] + " l/m²");
