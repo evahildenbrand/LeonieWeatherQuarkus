@@ -24,7 +24,6 @@ public class ExampleResource {
     String csvFile = "http://www.zamg.ac.at/ogd/";
     URL url = new URL(csvFile);
     InputStreamReader input = null;
-    int lineIndex = 1;
     String splitLine = ";";
     int town; //1
     int tempIndex; //5
@@ -32,7 +31,6 @@ public class ExampleResource {
     int rainIndex; //12
     int sunIndex; //15
     String[] weatherArray;
-    String returnString = "";
     String line;
     boolean searchTown = true;
 
@@ -51,6 +49,7 @@ public class ExampleResource {
 
             line = br.readLine();
             weatherArray = line.split(splitLine);
+
             for (int i = 0; i < weatherArray.length; i++) {
                 switch (weatherArray[i]){
                     case "\"Name\"":
@@ -86,24 +85,6 @@ public class ExampleResource {
                     weather.setSun(weatherArray[sunIndex] + " %");
                 }
             }
-/*
-            for(int i = 0; i <= lineIndex-1; i++){
-                line = br.readLine();
-                weatherArray = line.split(splitLine);
-
-                returnString = weatherArray[town]+ "<br> \n" +
-                        "Temperatur: " + weatherArray[tempIndex] + "°C <br> \n" +
-                        "Windgeschwindigkeit: " + weatherArray[windSpeedIndex] + "km/h <br> \n" +
-                        "Regenmenge: " + weatherArray[rainIndex] + "l/m² <br> \n" +
-                        "Sonnenschein: " + weatherArray[sunIndex] + "%";
-
-                weather.setCity(weatherArray[town]);
-                weather.setTemp(weatherArray[tempIndex] + " °C");
-                weather.setWindspeed(weatherArray[windSpeedIndex] + " km/h");
-                weather.setRain(weatherArray[rainIndex] + " l/m²");
-                weather.setSun(weatherArray[sunIndex] + " %");
-                //System.out.println(object);
-            }*/
 
         } catch (IOException e) {
             e.printStackTrace();
