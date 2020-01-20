@@ -26,13 +26,14 @@ public class ExampleResource {
     InputStreamReader input = null;
     int lineIndex = 1;
     String splitLine = ";";
-    int town = 1;
-    int tempIndex = 5;
-    int windSpeedIndex = 9;
-    int rainIndex = 12;
-    int sunIndex = 15;
+    int town; //1
+    int tempIndex; //5
+    int windSpeedIndex; //9
+    int rainIndex; //12
+    int sunIndex; //15
     String[] weatherArray;
     String returnString = "";
+    String line;
 
     public ExampleResource() throws MalformedURLException {
     }
@@ -47,8 +48,30 @@ public class ExampleResource {
 
             BufferedReader br = new BufferedReader(input);
 
-            br.readLine();
-            String line;
+            line = br.readLine();
+            weatherArray = line.split(splitLine);
+            for (int i = 0; i < weatherArray.length; i++) {
+                switch (weatherArray[i]){
+                    case "\"Name\"":
+                        town = i;
+                        break;
+                    case "\"T °C\"":
+                        tempIndex = i;
+                        break;
+                    case "\"WG km/h\"":
+                        windSpeedIndex = i;
+                        break;
+                    case "\"N l/m²\"":
+                        rainIndex = i;
+                        break;
+                    case "\"SO %\"":
+                        sunIndex = i;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
             for(int i = 0; i <= lineIndex-1; i++){
                 line = br.readLine();
                 weatherArray = line.split(splitLine);
@@ -74,4 +97,8 @@ public class ExampleResource {
         }
         return Response.ok(weather).build();
     }
+
+    //public int searchIndex(String city){
+
+    //}
 }
