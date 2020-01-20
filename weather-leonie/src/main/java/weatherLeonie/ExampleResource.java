@@ -50,20 +50,26 @@ public class ExampleResource {
             line = br.readLine();
             weatherArray = line.split(splitLine);
 
+            //Get indexes for...
             for (int i = 0; i < weatherArray.length; i++) {
                 switch (weatherArray[i]){
+                    //...town
                     case "\"Name\"":
                         town = i;
                         break;
+                    //...temperatur
                     case "\"T °C\"":
                         tempIndex = i;
                         break;
+                    //...windspeed
                     case "\"WG km/h\"":
                         windSpeedIndex = i;
                         break;
+                    //...rain
                     case "\"N l/m²\"":
                         rainIndex = i;
                         break;
+                    //...sun
                     case "\"SO %\"":
                         sunIndex = i;
                         break;
@@ -91,10 +97,7 @@ public class ExampleResource {
         } catch (NullPointerException ex){
             System.out.println("Mistake");
         }
+
         return Response.ok(weather).build();
     }
-
-    //public int searchIndex(String city){
-
-    //}
 }
