@@ -34,6 +34,7 @@ public class ExampleResource {
     String[] weatherArray;
     String returnString = "";
     String line;
+    boolean searchTown = true;
 
     public ExampleResource() throws MalformedURLException {
     }
@@ -72,6 +73,20 @@ public class ExampleResource {
                 }
             }
 
+            while(searchTown){
+                line = br.readLine();
+                weatherArray = line.split(splitLine);
+
+                if(weatherArray[town].equals("\"Linz/Hörsching\"")){
+                    searchTown = false;
+                    weather.setCity(weatherArray[town]);
+                    weather.setTemp(weatherArray[tempIndex] + " °C");
+                    weather.setWindspeed(weatherArray[windSpeedIndex] + " km/h");
+                    weather.setRain(weatherArray[rainIndex] + " l/m²");
+                    weather.setSun(weatherArray[sunIndex] + " %");
+                }
+            }
+/*
             for(int i = 0; i <= lineIndex-1; i++){
                 line = br.readLine();
                 weatherArray = line.split(splitLine);
@@ -88,7 +103,7 @@ public class ExampleResource {
                 weather.setRain(weatherArray[rainIndex] + " l/m²");
                 weather.setSun(weatherArray[sunIndex] + " %");
                 //System.out.println(object);
-            }
+            }*/
 
         } catch (IOException e) {
             e.printStackTrace();
