@@ -88,7 +88,12 @@ public class ExampleResource {
                     weather.setCity(weatherArray[town].replace("\"",""));
                     weather.setTemp(weatherArray[tempIndex] + " °C");
                     weather.setWindspeed(weatherArray[windSpeedIndex] + " km/h");
-                    weather.setRain(weatherArray[rainIndex] + " l/m²");
+                    if(weatherArray[rainIndex].isEmpty()){
+                        weather.setRain("0 l/m²");
+                    }else{
+                        weather.setRain(weatherArray[rainIndex] + " l/m²");
+                    }
+
                     weather.setSun(weatherArray[sunIndex] + " %");
                 }
             }
