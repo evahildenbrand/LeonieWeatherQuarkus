@@ -1,0 +1,38 @@
+= Dokumentation Wetter Plugin
+Hildenbrand Eva
+1.0, 08-06-2020
+
+:icons: font
+ifndef::imagesdir[:imagesdir: images]
+
+== Wetter Plugin
+
+Die Wetterdaten werden jedes Mal, wenn die Seite aufgerufen wird, neu vom Server (http://www.zamg.ac.at/ogd/) heruntergeholt. Der Server liefert eine CSV-Datei namens "tawes1h.csv". (Eine solche Datei befindet sich in meinem Repo.) Die Spalten beginnen mit der Zahl 0!
+
+Mit meinem Code lese ich dann folgende Daten aus der CSV-Datei aus:
+
+* City, Spalte 1:
+** Name des Ortes/der Stadt, in welcher die Wetterstation steht.
+* Temp, Spalte 5:
+** Aktuelle Außentemperatur bei der Wetterstation, welche in der CSV-Datei gespeichert ist, in °C.
+* Windspeed, Spalte 9 :
+** Aktuelle Windgeschwindigkeit bei der Wetterstation in km/h.
+* Rain, Spalte 12:
+** Akteulle Regenmenge bei der Wetterstation in l/m².
+* Sun, Spalte 15:
+** Aktuell gespeicherter Sonnenschein in Prozent bei der Wetterstation.
+
+Diese Daten speichere ich in einem Array. Mit Hilfe von diesem Array wird dann ein Wetter-Modell erstellt, welches in einen JSON-Response umgewandelt und zurückgegeben wird.
+
+Wenn man die Seite im Terminal mit dem curl-Befehl 
+(curl -w "\n" http://localhost:8080/weather) aufruft, sieht die Ausgabe beispielsweise so aus:
+
+image::./curl.PNG[Terminal-Output]
+
+Im Browser (z.B.: Firefox), werden die JSON-Daten wie folgt dargestellt:
+
+image::./browser.PNG[Browser-Output]
+
+Auf der Website von Leonie wird derzeit der JSON-Response unformatiert angezeigt:
+
+image::./leonie.PNG[Leoniewebsite]
