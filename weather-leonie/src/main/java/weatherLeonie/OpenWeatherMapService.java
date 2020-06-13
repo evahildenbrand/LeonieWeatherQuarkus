@@ -21,7 +21,8 @@ public interface OpenWeatherMapService {
     @Produces(MediaType.APPLICATION_JSON)
     JsonValue getWeatherByCity(
             @QueryParam("q") String city,
-            @QueryParam("appid") String key
+            @QueryParam("appid") String key,
+            @QueryParam("units") String unit
     );
 
 }
