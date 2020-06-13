@@ -7,7 +7,7 @@
         body{
             font-family: Arial;
             font-size: 140%;
-            color: #000000;
+            color: #ffffff;
             background-repeat: no-repeat;
             background-size: 100%;
             -moz-background-size: cover;
@@ -15,7 +15,7 @@
             overflow: hidden;
         }
         .weather{
-            background-color: rgba(200,200,200,0.5);
+            background-color: rgba(100,100,100,0.5);
             border: 5px solid #cdcdcd;
             border-radius: 15px;
             width: 45%;
@@ -64,28 +64,17 @@
                 //alert(JSON.stringify(data));
                 var keys = Object.keys(data);
                 //alert(keys);
+                var sysDate = new Date();
                 var currentDate = new Date();
-                var sunrise = new Date(data["sys"]["sunrise"] * 1000);
-                var sunset = new Date(data["sys"]["sunset"] * 1000);
+                currentDate.setTime(sysDate.getTime() + data["timezone"]*1000 + sysDate.getTimezoneOffset()*60000);
+
+                var sunrise = new Date(data["sys"]["sunrise"] * 1000 + data["timezone"]*1000 + sysDate.getTimezoneOffset()*60000);
+                var sunset = new Date(data["sys"]["sunset"] * 1000 + data["timezone"]*1000 + sysDate.getTimezoneOffset()*60000);
+
                 var icon = document.createElement("img");
 
                 document.getElementById("city").innerHTML = data["name"];
-
-                if(currentDate.getDay() < 10){
-                    if(currentDate.getMonth() < 10){
-                        currentDate = "0" + currentDate.getDay() + ".0" + currentDate.getMonth() + "." + currentDate.getFullYear();
-                    }else{
-                        currentDate = "0" + currentDate.getDay() + "." + currentDate.getMonth() + "." + currentDate.getFullYear();
-                    }
-                }else{
-                    if(currentDate.getMonth() < 10){
-                        currentDate = currentDate.getDay() + ".0" + currentDate.getMonth() + "." + currentDate.getFullYear();
-                    }else{
-                        currentDate = currentDate.getDay() + "." + currentDate.getMonth() + "." + currentDate.getFullYear();
-                    }
-                }
-
-                document.getElementById("date").innerHTML = currentDate;
+                document.getElementById("date").innerHTML = currentDate.toLocaleDateString();
 
                 sunrise = leadingZero(sunrise);
                 sunset = leadingZero(sunset);
@@ -93,6 +82,7 @@
                 document.getElementById("sun").innerHTML = "Sonnenaufgang: " + sunrise
                     + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Sonnenuntergang: " + sunset;
 
+                //Icons: https://openweathermap.org/weather-conditions
                 icon.src = "http://openweathermap.org/img/w/" + data["weather"]["0"]["icon"] + ".png";
                 icon.width = 100;
                 document.getElementById("weatherIcon").appendChild(icon);
