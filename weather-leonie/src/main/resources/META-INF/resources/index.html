@@ -73,6 +73,18 @@
 
                 var icon = document.createElement("img");
 
+                if(data["rain"] != null){
+                    document.body.style.backgroundImage = "url('images/rain.jpg')";
+                }else if (data["weather"]["0"]["main"] == "Clouds"){
+                    document.body.style.backgroundImage = "url('images/clouds.jpg')";
+                }else if(currentDate.getHours() >= 19 && currentDate.getHours() < 21 || currentDate.getHours() >= 5 && currentDate.getHours() < 7){
+                    document.body.style.backgroundImage = "url('images/twilight.jpg')";
+                }else if(currentDate.getHours() >= 21 || currentDate.getHours() < 5){
+                    document.body.style.backgroundImage = "url('images/night.jpg')";
+                }else if(currentDate.getHours() >= 7 || currentDate.getHours() <19){
+                    document.body.style.backgroundImage = "url('images/day.jpg')";
+                }
+
                 document.getElementById("city").innerHTML = data["name"];
                 document.getElementById("date").innerHTML = currentDate.toLocaleDateString();
 
