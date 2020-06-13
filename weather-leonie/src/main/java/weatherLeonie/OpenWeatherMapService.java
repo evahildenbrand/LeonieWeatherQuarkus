@@ -24,5 +24,16 @@ public interface OpenWeatherMapService {
             @QueryParam("appid") String key,
             @QueryParam("units") String unit
     );
+    
+    //api.openweathermap.org/data/2.5/forecast/daily?q={city name}&cnt={cnt}&appid={your api key}
+    @GET
+    @Path("forecast/daily")
+    @Produces(MediaType.APPLICATION_JSON)
+    JsonValue getForecastByCity(
+            @QueryParam("q") String city,
+            @QueryParam("cnt") String days,
+            @QueryParam("appid") String key,
+            @QueryParam("units") String unit
+    );
 
 }
