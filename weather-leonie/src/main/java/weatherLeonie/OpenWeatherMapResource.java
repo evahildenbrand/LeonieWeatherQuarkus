@@ -5,6 +5,7 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.inject.Inject;
 import javax.json.JsonValue;
+import javax.print.attribute.standard.Media;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -22,6 +23,8 @@ public class OpenWeatherMapResource {
     @ConfigProperty(name = "openweathermap.api-key")
     String apiKey;
 
+    String tempUnit = "metric";
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getWeather(@QueryParam("city") String city) {
@@ -30,10 +33,21 @@ public class OpenWeatherMapResource {
 //                .add("api-key", apiKey)
 //                .build();
         //JsonValue weatherByCity = this.openWeatherMapService.getWeatherByCity(city);
-        JsonValue weatherByCity = this.openWeatherMapService.getWeatherByCity(city,apiKey);
+        JsonValue weatherByCity = this.openWeatherMapService.getWeatherByCity(city,apiKey,tempUnit);
 
         return Response
                 .ok(weatherByCity)
+                .build();
+    }
+
+    @GET
+    @Path("/forecast")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getForecast(@QueryParam("city") String city, @QueryParam("days") String days){
+        JsonValue forecastByCity = this.openWeatherMapService.getForecastByCity(city,days,apiKey,tempUnit);
+
+        return Response
+                .ok(forecastByCity)
                 .build();
     }
 
