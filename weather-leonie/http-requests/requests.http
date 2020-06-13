@@ -2,3 +2,8 @@ GET http://localhost:8080/openweather?city=Leonding
 content-type: application/json
 
 ###
+
+GET http://localhost:8080/openweather/forecast?city=Leonding&days?16
+content-type: application/json
+
+###
