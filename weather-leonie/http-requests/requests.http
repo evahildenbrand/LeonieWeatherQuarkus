@@ -1,0 +1,4 @@
+GET http://localhost:8080/openweather?city=Leonding
+content-type: application/json
+
+###
