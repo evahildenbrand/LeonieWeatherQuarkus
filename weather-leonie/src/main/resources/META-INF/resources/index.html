@@ -4,7 +4,55 @@
     <meta charset="UTF-8">
     <title>Wetter</title>
     <style>
-
+        body{
+            font-family: Arial;
+            font-size: 140%;
+            color: #000000;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            -moz-background-size: cover;
+            -webkit-background-size: cover;
+            overflow: hidden;
+        }
+        .weather{
+            background-color: rgba(200,200,200,0.5);
+            border: 5px solid #cdcdcd;
+            border-radius: 15px;
+            width: 45%;
+            margin-left: 25%;
+            margin-right: auto;
+            margin-top: 5%;
+        }
+        h1{
+            text-align: center;
+        }
+        #date{
+            float: right;
+            margin-top: -15%;
+            margin-right: 2%;
+        }
+        #sun{
+            text-align: center;
+        }
+        #weatherIcon{
+            margin-left: 10%;
+            margin-top: -2%;
+        }
+        .temp{
+            margin-top: -18%;
+            text-align: center;
+        }
+        #temperature{
+            font-weight: bold;
+            font-size: 120%;
+        }
+        #minMaxTemp{
+            margin-top: -3%;
+        }
+        .informations{
+            margin-left: 5%;
+            margin-top: 3%;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script type="text/javascript">
@@ -22,41 +70,76 @@
                 var icon = document.createElement("img");
 
                 document.getElementById("city").innerHTML = data["name"];
-                document.getElementById("date").innerHTML = currentDate.getDay() + "." + currentDate.getMonth() + "." + currentDate.getFullYear();
-                document.getElementById("sunrise").innerHTML = "Sonnenaufgang: "
-                    + sunrise.getHours() + ":" + sunrise.getMinutes() + ":" + sunrise.getSeconds();
-                document.getElementById("sunset").innerHTML = "Sonnenuntergang: "
-                    + sunset.getHours() + ":" + sunset.getMinutes() + ":" + sunset.getSeconds();
+
+                if(currentDate.getDay() < 10){
+                    if(currentDate.getMonth() < 10){
+                        currentDate = "0" + currentDate.getDay() + ".0" + currentDate.getMonth() + "." + currentDate.getFullYear();
+                    }else{
+                        currentDate = "0" + currentDate.getDay() + "." + currentDate.getMonth() + "." + currentDate.getFullYear();
+                    }
+                }else{
+                    if(currentDate.getMonth() < 10){
+                        currentDate = currentDate.getDay() + ".0" + currentDate.getMonth() + "." + currentDate.getFullYear();
+                    }else{
+                        currentDate = currentDate.getDay() + "." + currentDate.getMonth() + "." + currentDate.getFullYear();
+                    }
+                }
+
+                document.getElementById("date").innerHTML = currentDate;
+
+                sunrise = leadingZero(sunrise);
+                sunset = leadingZero(sunset);
+
+                document.getElementById("sun").innerHTML = "Sonnenaufgang: " + sunrise
+                    + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Sonnenuntergang: " + sunset;
 
                 icon.src = "http://openweathermap.org/img/w/" + data["weather"]["0"]["icon"] + ".png";
+                icon.width = 100;
                 document.getElementById("weatherIcon").appendChild(icon);
 
                 document.getElementById("temperature").innerHTML = data["main"]["temp"] + "°C";
-                document.getElementById("minTemp").innerHTML = "min. " + data["main"]["temp_min"] + "°C";
-                document.getElementById("maxTemp").innerHTML = "max. " + data["main"]["temp_max"] + "°C";
+                document.getElementById("minMaxTemp").innerHTML = "min. " + data["main"]["temp_min"] + "°C"
+                    + "&nbsp; &nbsp; max. " + data["main"]["temp_max"] + "°C";
                 document.getElementById("humidity").innerHTML = "Luftfeuchtigkeit: " + data["main"]["humidity"] + " %";
                 document.getElementById("visibility").innerHTML = "Sichtweite: " + data["visibility"] + " m";
                 document.getElementById("windspeed").innerHTML = "Windgeschwindigkeit: " + data["wind"]["speed"] + " m/s";
            }
         });
+
+        function leadingZero(time) {
+            if(time.getHours() < 10){
+                if(time.getMinutes() < 10){
+                    time = "0" + time.getHours() + ":0" + time.getMinutes();
+                }else{
+                    time = "0" + time.getHours() + ":" + time.getMinutes();
+                }
+            }else{
+                if(time.getMinutes() < 10){
+                    time = time.getHours() + ":0" + time.getMinutes();
+                }else{
+                    time = time.getHours() + ":" + time.getMinutes();
+                }
+            }
+            return time;
+        }
     </script>
 </head>
 <body>
-    <h1 id="city"></h1>
-    <p id="date"></p>
-    <p id="koordinates"></p>
-    <div>
-        <p id="sunrise"></p>
-        <p id="sunset"></p>
+    <div class="weather">
+        <h1 id="city"></h1>
+        <p id="date"></p>
+        <p id="koordinates"></p>
+        <p id="sun">
+        <p id="weatherIcon"></p>
+        <div class="temp">
+            <p id="temperature"></p>
+            <p id="minMaxTemp"></p>
+        </div>
+        <div class="informations">
+            <p id="humidity"></p>
+            <p id="visibility"></p>
+            <p id="windspeed"></p>
+        </div>
     </div>
-    <p id="weatherIcon"></p>
-    <div>
-        <p id="temperature"></p>
-        <p id="minTemp"></p>
-        <p id="maxTemp"></p>
-    </div>
-    <p id="humidity"></p>
-    <p id="visibility"></p>
-    <p id="windspeed"></p>
 </body>
 </html>
