@@ -44,31 +44,31 @@ localhost:8080/openweather?city=Leonding
 ----
 image::./openweather.PNG[Openweather-JSON]
 
-Es gibt auch eine Website, welche das aktuelle Wetter einer Stadt anzeigt. Derzeit zeigt die Website das aktuelle Wetter von Leonding an. Will man die Stadt ändern, muss man in der index.html Datei in folgender Codezeile die Stadt beim URL umändern:
+Es gibt auch eine Website, welche das aktuelle Wetter einer Stadt anzeigt. Derzeit zeigt die Website das aktuelle Wetter von Leonding an und die Wettervorhersage für die nächsten 3 Tage. Will man die Stadt ändern, muss man in der index.html Datei in folgender Codezeile die Stadt umändern:
 
-image::./code.PNG[Codeline]
+image::./codeline.PNG[Codeline]
 
 Bei der Website wird das Hintergrundbild je nach Wetterlage geändert.
 
 Bei Tag schaut die Website folgendermaßen aus:
 
-image::./day.PNG[Tag]
+image::./day_new.PNG[Tag]
 
 Bei Sonnenaufgang (zwischen 5 und 7 Uhr) bzw. Sonnenuntergang (zwischen 19 und 21 Uhr) sieht die Website so aus:
 
-image::./twilight.PNG[Sonnenaufgang bzw. -untergang]
+image::./twilight_new.PNG[Sonnenaufgang bzw. -untergang]
 
 In der Nacht wird folgendes Bild angezeigt:
 
-image::./night.PNG[Nacht]
+image::./night_new.PNG[Nacht]
 
 Ist es bewölkt, sieht die Website so aus:
 
-image::./clouds.PNG[bewölkt]
+image::./clouds_new.PNG[bewölkt]
 
 Regnet es, wird folgendes Bild angezeigt:
 
-image::./rain.PNG[Regen]
+image::./rain_new.PNG[Regen]
 
 === Wettervorhersage
 
