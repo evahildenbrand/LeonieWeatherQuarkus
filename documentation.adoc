@@ -5,7 +5,7 @@ Hildenbrand Eva
 :icons: font
 ifndef::imagesdir[:imagesdir: images]
 
-== Wetter Plugin
+== ZAMG-Server
 
 Die Wetterdaten werden jedes Mal, wenn die Seite aufgerufen wird, neu vom Server (http://www.zamg.ac.at/ogd/) heruntergeholt. Der Server liefert eine CSV-Datei namens "tawes1h.csv". (Eine solche Datei befindet sich in meinem Repo.) Die Spalten beginnen mit der Zahl 0!
 
@@ -36,3 +36,34 @@ image::./browser.PNG[Browser-Output]
 Auf der Website von Leonie wird derzeit der JSON-Response unformatiert angezeigt:
 
 image::./leonie.PNG[Leoniewebsite]
+
+== Openweathermap-Server
+
+image::./diagram.PNG[WetterPlugin-Diagramm]
+
+Um diesen Server zu verwenden, muss man sich zuerst einen API-Key von der Seite (https://openweathermap.org/api) erstellen. Diesen muss man mit dem Namen APIKEY als Systemvariable lokal am Rechner eintragen. (Rechner neu starten nicht vergessen!)
+
+Es gibt generell 2 Arten von Wetterdaten, welche das Programm liefert, nämlich das aktuelle Wetter einer angegebenen Stadt oder die Wettervorhersage für die Anzahl der angegebenen Tage einer angegebenen Stadt. Es wird immer ein JSON-Response geliefert.
+
+Der JSON-Response des aktuellen Wetters sieht zum Beispiel für Leonding folgendermaßen aus:
+
+image::./openweather.PNG[aktuelles Wetter-JSON]
+
+Auf der dazu erstellten Website (localhost:8080) werden folgende Daten ausgegeben:
+
+* Name der Stadt
+* Datum
+* Sonnenauf- und Sonnenuntergang
+* Icon, zur Veranschaulichung des aktuellen Wetters
+* aktuelle Temperatur
+* minimale Temperatur
+* maximale Temperatur
+* Luftfeuchtigkeit
+* Sichtweite
+* Windgeschwindigkeit
+
+Der JSON-Response der Wettervorhersage sieht für Leonding und 5 Vorhersagetage folgendermaßen aus. Das Wetter der nächsten Tage ist im key "list" eingetragen:
+
+image::./forecast.PNG[]
+
+
