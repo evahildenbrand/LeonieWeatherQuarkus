@@ -33,6 +33,8 @@ image::./browser.PNG[Browser-Output]
 
 == Verwendung des Openweather-Servers
 
+Um dies zu verwenden, muss man sich von der Website https://openweathermap.org/api einen APIKEY holen und diesen mit dem Namen APIKEY als Systemvariable eintragen.
+
 === Aktuelles Wetter je Stadt
 
 Um das aktuelle Wetter einer Stadt zu bekommen, muss man im URL einen QueryParam mit einer Stadt mitgeben. Der URL dazu lautet:
