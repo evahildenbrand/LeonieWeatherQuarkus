@@ -53,18 +53,87 @@
             margin-left: 5%;
             margin-top: 3%;
         }
+
+        hr{
+            color: #ffffff;
+        }
+
+        .forecast{
+            margin-left: 5%;
+        }
+
+        #fDate1{
+            font-size: 70%;
+            margin-bottom: 0%;
+            padding-bottom: 0%;
+            margin-left: 5%;
+        }
+        #fDate2{
+            font-size: 70%;
+            margin-bottom: 0%;
+            padding-bottom: 0%;
+            margin-left: 7%;
+        }
+        #fDate3{
+            font-size: 70%;
+            margin-bottom: 0%;
+            padding-bottom: 0%;
+            margin-left: 11%;
+        }
+        #fIcon1{
+            margin-top: -2%;
+            margin-left: 7%;
+            margin-bottom: 0%;
+        }
+        #fIcon2{
+            margin-top: -2.5%;
+            margin-left: 9%;
+            margin-bottom: 0%;
+        }
+        #fIcon3{
+            margin-top: -3.5%;
+            margin-left: 17%;
+            margin-bottom: 0%;
+        }
+        #fTemp1{
+            font-size: 70%;
+            margin-top: -2%;
+        }
+        #fTemp2{
+            font-size: 70%;
+            margin-top: -2.5%;
+        }
+        #fTemp3{
+            font-size: 70%;
+            margin-top: -5%;
+        }
+
+        .first{
+            margin-left: 5%;
+        }
+        .second{
+            margin-top: -15.3%;
+            margin-left: 35%;
+        }
+        .third{
+            margin-top: -15.5%;
+            margin-left: 65%;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script type="text/javascript">
+        var city = "Leonding";
+        var days = 4;
+        var sysDate = new Date();
+
         $.ajax({
            type: "GET",
-           url: "http://localhost:8080/openweather?city=Leonding",
+           url: "http://localhost:8080/openweather?city=" + city,
            dataType: "json",
            success: function (data) {
                 //alert(JSON.stringify(data));
                 var keys = Object.keys(data);
                 //alert(keys);
-                var sysDate = new Date();
                 var currentDate = new Date();
                 currentDate.setTime(sysDate.getTime() + data["timezone"]*1000 + sysDate.getTimezoneOffset()*60000);
 
@@ -108,6 +177,30 @@
            }
         });
 
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/openweather/forecast?city=" + city + "&days=" + days,
+            dataType: "json",
+            success: function (data) {
+                var date;
+                var icon;
+
+                for(var i = 1; i <= days; i++){
+                    date = new Date(data["list"]["" + i]["sunrise"]*1000 + data["city"]["timezone"]*1000 + sysDate.getTimezoneOffset()*60000);
+                    document.getElementById("fDate" + i).innerHTML = date.toLocaleDateString();
+
+                    icon = document.createElement("img");
+                    icon.src = "http://openweathermap.org/img/w/" + data["list"]["" + i]["weather"]["0"]["icon"] + ".png";
+                    icon.width = 50;
+                    document.getElementById("fIcon" + i).appendChild(icon);
+
+                    document.getElementById("fTemp" + i).innerHTML = data["list"]["" + i]["temp"]["min"] + "°C - " + data["list"]["" + i]["temp"]["max"] + "°C";
+                }
+
+
+            }
+        });
+
         function leadingZero(time) {
             if(time.getHours() < 10){
                 if(time.getMinutes() < 10){
@@ -141,6 +234,24 @@
             <p id="humidity"></p>
             <p id="visibility"></p>
             <p id="windspeed"></p>
+        </div>
+        <hr>
+        <div class="forecast">
+            <div class="first">
+                <p id="fDate1"></p>
+                <p id="fIcon1"></p>
+                <p id="fTemp1"></p>
+            </div>
+            <div class="second">
+                <p id="fDate2"></p>
+                <p id="fIcon2"></p>
+                <p id="fTemp2"></p>
+            </div>
+            <div class="third">
+                <p id="fDate3"></p>
+                <p id="fIcon3"></p>
+                <p id="fTemp3"></p>
+            </div>
         </div>
     </div>
 </body>
