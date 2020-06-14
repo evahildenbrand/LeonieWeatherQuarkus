@@ -1,11 +1,81 @@
-# LeonieWeatherQuarkus
+= LeonieWeatherQuarkus
+Hildenbrand Eva
+1.0, 14-06-2020
 
-<p>
- To use the Weatherplugin for Leonie, it has to be with Quarkus.<br>
- To run the project, first you have to start it in the Terminal with: ./mvnw compile quarkus:dev <br>
- If you have a Windows-Machine you have to start it in the Terminal with: .\mvnw compile quarkus:dev <br>
- To get the weatherdata you can write in the Terminal: curl -w "\n" http://localhost:8080/weather
- <img src="./images/curl.PNG">
- or you go in the Browser to the url "localhost:8080/weather".
- <img src="./images/browser.PNG">
-</p>
+:icons: font
+ifndef::imagesdir[:imagesdir: images]
+
+Um das Plugin zu verwenden, muss das Programm zuerst gestartet werden. Dafür gibt man im Terminal folgeden Befehl ein:
+[source,cmd]
+----
+./mvnw compile quarkus:dev
+----
+Verwendet man Windows lautet der Terminalbefehl
+[source,cmd]
+----
+.\mvnw compile quarkus:dev
+----
+
+== Verwendung des ZAMG-Servers
+
+Nachdem man das Programm gestartet hat, kann man nun die Wetterdaten des ZAMG-Servers auslesen. Dies funktioniert entweder mit einem Terminalbefehl oder mit dem Browser. Der Terminalbefehl lautet:
+[source,cmd]
+----
+curl -w "\n" http://localhost:8080/weather
+----
+image::./curl.PNG[Terminal-Output]
+Der Browser-URL lautet:
+[source,browser]
+----
+localhost:8080/weather
+----
+image::./browser.PNG[Browser-Output]
+
+== Verwendung des Openweather-Servers
+
+=== Aktuelles Wetter je Stadt
+
+Um das aktuelle Wetter einer Stadt zu bekommen, muss man im URL einen QueryParam mit einer Stadt mitgeben. Der URL dazu lautet:
+[source,cmd]
+----
+localhost:8080/openweather?city=Leonding
+----
+image::./openweather.PNG[Openweather-JSON]
+
+Es gibt auch eine Website, welche das aktuelle Wetter einer Stadt anzeigt. Derzeit zeigt die Website das aktuelle Wetter von Leonding an. Will man die Stadt ändern, muss man in der index.html Datei in folgender Codezeile die Stadt beim URL umändern:
+
+image::./code.PNG[Codeline]
+
+Bei der Website wird das Hintergrundbild je nach Wetterlage geändert.
+
+Bei Tag schaut die Website folgendermaßen aus:
+
+image::./day.PNG[Tag]
+
+Bei Sonnenaufgang (zwischen 5 und 7 Uhr) bzw. Sonnenuntergang (zwischen 19 und 21 Uhr) sieht die Website so aus:
+
+image::./twilight.PNG[Sonnenaufgang bzw. -untergang]
+
+In der Nacht wird folgendes Bild angezeigt:
+
+image::./night.PNG[Nacht]
+
+Ist es bewölkt, sieht die Website so aus:
+
+image::./clouds.PNG[bewölkt]
+
+Regnet es, wird folgendes Bild angezeigt:
+
+image::./rain.PNG[Regen]
+
+=== Wettervorhersage
+
+Auch die Wettervorhersage kann für eine Stadt ausgelesen werden. Dafür muss im URL nicht nur die Stadt, sondern auch die Anzahl der Tage, für welche man die Vorhersage haben möchte, angeben. Der URL dafür lautet also:
+[source,cmd]
+----
+http://localhost:8080/openweather/forecast?city=Leonding&days=5
+----
+
+Im JSON-Response wird eine Liste mitgegeben, mit dem Wetter von den angegebenen Tagen.
+
+image::./forecast.PNG[Wettervorhersage]
