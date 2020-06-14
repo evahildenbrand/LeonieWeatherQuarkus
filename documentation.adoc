@@ -61,6 +61,7 @@ Auf der dazu erstellten Website (localhost:8080) werden folgende Daten ausgegebe
 * Luftfeuchtigkeit
 * Sichtweite
 * Windgeschwindigkeit
+* Wettervorhersage für die nächsten 3 Tage
 
 Der JSON-Response der Wettervorhersage sieht für Leonding und 5 Vorhersagetage folgendermaßen aus. Das Wetter der nächsten Tage ist im key "list" eingetragen:
 
