@@ -12,7 +12,6 @@
             background-size: 100%;
             -moz-background-size: cover;
             -webkit-background-size: cover;
-            overflow: hidden;
         }
         .weather{
             background-color: rgba(100,100,100,0.5);
@@ -204,6 +203,10 @@
                         weekday = "Donnerstag";
                     }else if(day[0] == "Fri"){
                         weekday = "Freitag";
+                    }else if(day[0] == "Sat"){
+                        weekday = "Samstag";
+                    }else if(day[0] == "Sun"){
+                        weekday = "Sunday";
                     }
 
                     document.getElementById("fDate" + i).innerHTML = weekday;
