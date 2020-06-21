@@ -154,9 +154,9 @@
     </style>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script type="text/javascript">
-        var city = "Leonding";
-        var days = 4;
-        var sysDate = new Date();
+        const city = "Leonding";
+        const days = 4;
+        const sysDate = new Date();
 
         $.ajax({
            type: "GET",
@@ -164,31 +164,31 @@
            dataType: "json",
            success: function (data) {
                 //alert(JSON.stringify(data));
-                var keys = Object.keys(data);
-                //alert(keys);
-                var currentDate = new Date();
-                currentDate.setTime(sysDate.getTime() + data["timezone"]*1000 + sysDate.getTimezoneOffset()*60000);
+               const keys = Object.keys(data);
+               //alert(keys);
+               const currentDate = new Date();
+               currentDate.setTime(sysDate.getTime() + data["timezone"]*1000 + sysDate.getTimezoneOffset()*60000);
 
-                var sunrise = new Date(data["sys"]["sunrise"] * 1000 + data["timezone"]*1000 + sysDate.getTimezoneOffset()*60000);
-                var sunset = new Date(data["sys"]["sunset"] * 1000 + data["timezone"]*1000 + sysDate.getTimezoneOffset()*60000);
+               let sunrise = new Date(data["sys"]["sunrise"] * 1000 + data["timezone"] * 1000 + sysDate.getTimezoneOffset() * 60000);
+               let sunset = new Date(data["sys"]["sunset"] * 1000 + data["timezone"] * 1000 + sysDate.getTimezoneOffset() * 60000);
 
-                var icon = document.createElement("img");
+               const icon = document.createElement("img");
 
-                var x = 90;
-                var y = 40;
-                var sun = document.querySelector('.sunPos');
+               let x = 90;
+               const y = 40;
+               const sun = document.querySelector('.sunPos');
 
-                if(data["rain"] != null){
+               if(data["rain"] != null){
                     document.body.style.backgroundImage = "url('images/rain.jpg')";
-                }else if (data["weather"]["0"]["main"] == "Clouds"){
+               }else if (data["weather"]["0"]["main"] == "Clouds"){
                     document.body.style.backgroundImage = "url('images/clouds.jpg')";
-                }else if(currentDate.getHours() >= 19 && currentDate.getHours() < 21 || currentDate.getHours() >= 5 && currentDate.getHours() < 7){
+               }else if(currentDate.getHours() >= 19 && currentDate.getHours() < 21 || currentDate.getHours() >= 5 && currentDate.getHours() < 7){
                     document.body.style.backgroundImage = "url('images/twilight.jpg')";
-                }else if(currentDate.getHours() >= 21 || currentDate.getHours() < 5){
+               }else if(currentDate.getHours() >= 21 || currentDate.getHours() < 5){
                     document.body.style.backgroundImage = "url('images/night.jpg')";
-                }else if(currentDate.getHours() >= 7 || currentDate.getHours() <19){
+               }else if(currentDate.getHours() >= 7 || currentDate.getHours() <19){
                     document.body.style.backgroundImage = "url('images/day.jpg')";
-                }
+               }
 
                if(currentDate.getHours() >= 0 && currentDate.getHours() <5){
                    x = 0;
@@ -222,7 +222,7 @@
                 icon.width = 100;
                 document.getElementById("weatherIcon").appendChild(icon);
 
-                var mainTemp = Math.round(data["main"]["temp"]);
+                const mainTemp = Math.round(data["main"]["temp"]);
 
                 document.getElementById("temperature").innerHTML = mainTemp + "°C";
                 document.getElementById("minMaxTemp").innerHTML = "min. " + Math.round(data["main"]["temp_min"]) + "°C"
@@ -238,14 +238,14 @@
             url: "http://localhost:8080/openweather/forecast?city=" + city + "&days=" + days,
             dataType: "json",
             success: function (data) {
-                var date;
-                var weekday = "";
-                var icon;
+                let date;
+                let weekday = "";
+                let icon;
 
-                for(var i = 1; i <= days; i++){
+                for(let i = 1; i <= days; i++){
                     date = new Date(data["list"][i]["sunrise"]*1000 + data["city"]["timezone"]*1000 + sysDate.getTimezoneOffset()*60000);
 
-                    var day = date.toDateString().split(" ");
+                    const day = date.toDateString().split(" ");
 
                     if(day[0] == "Mon"){
                         weekday = "Montag";
