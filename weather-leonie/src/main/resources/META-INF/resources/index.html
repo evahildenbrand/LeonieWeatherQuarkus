@@ -112,43 +112,46 @@
             margin-left: 11%;
         }
         #fIcon1{
-            margin-top: -2%;
-            margin-left: 7%;
-            margin-bottom: 0%;
+            margin-top: 0px;
+            margin-left: 32px;
+            margin-bottom: 0px;
         }
         #fIcon2{
-            margin-top: -2.5%;
-            margin-left: 9%;
-            margin-bottom: 0%;
+            margin-top: -2.5px;
+            margin-left: 35px;
+            margin-bottom: 0px;
         }
         #fIcon3{
-            margin-top: -3.5%;
-            margin-left: 17%;
-            margin-bottom: 0%;
+            margin-top: -3.5px;
+            margin-left: 30px;
+            margin-bottom: 0px;
         }
         #fTemp1{
             font-size: 70%;
             margin-top: -2%;
             margin-bottom: 2%;
+            margin-left: 17px;
         }
         #fTemp2{
             font-size: 70%;
             margin-top: -2.5%;
+            margin-left: 17px;
         }
         #fTemp3{
             font-size: 70%;
             margin-top: -5%;
+            margin-left: 15px;
         }
 
         .first{
             margin-left: 5%;
         }
         .second{
-            margin-top: -13.2%;
+            margin-top: -95px;
             margin-left: 35%;
         }
         .third{
-            margin-top: -13.5%;
+            margin-top: -93px;
             margin-left: 65%;
         }
     </style>
@@ -207,7 +210,7 @@
                }
 
                 document.getElementById("city").innerHTML = data["name"];
-                document.getElementById("date").innerHTML = currentDate.toLocaleDateString();
+                document.getElementById("date").innerHTML = currentDate.getDate() + " " +  currentDate.toLocaleString('default', {month: 'long'});
 
                 sun.style.transform="rotateX("+y+"deg) rotate("+x+"deg)";
 
