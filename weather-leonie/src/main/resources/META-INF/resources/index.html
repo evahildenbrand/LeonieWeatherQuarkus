@@ -214,8 +214,8 @@
                 sunrise = leadingZero(sunrise);
                 sunset = leadingZero(sunset);
 
-                document.getElementById("sun").innerHTML = "Sonnenaufgang: " + sunrise
-                    + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Sonnenuntergang: " + sunset;
+                document.getElementById("sun").innerHTML = sunrise + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "
+                    + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;" + sunset;
 
                 //Icons: https://openweathermap.org/weather-conditions
                 icon.src = "http://openweathermap.org/img/w/" + data["weather"]["0"]["icon"] + ".png";
