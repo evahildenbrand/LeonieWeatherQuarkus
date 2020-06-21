@@ -186,11 +186,27 @@
             dataType: "json",
             success: function (data) {
                 var date;
+                var weekday = "";
                 var icon;
 
                 for(var i = 1; i <= days; i++){
-                    date = new Date(data["list"]["" + i]["sunrise"]*1000 + data["city"]["timezone"]*1000 + sysDate.getTimezoneOffset()*60000);
-                    document.getElementById("fDate" + i).innerHTML = date.toLocaleDateString();
+                    date = new Date(data["list"][i]["sunrise"]*1000 + data["city"]["timezone"]*1000 + sysDate.getTimezoneOffset()*60000);
+
+                    var day = date.toDateString().split(" ");
+
+                    if(day[0] == "Mon"){
+                        weekday = "Montag";
+                    }else if(day[0] == "Tue"){
+                        weekday = "Dienstag";
+                    }else if(day[0] == "Wed"){
+                        weekday = "Mittwoch";
+                    }else if(day[0] == "Thu"){
+                        weekday = "Donnerstag";
+                    }else if(day[0] == "Fri"){
+                        weekday = "Freitag";
+                    }
+
+                    document.getElementById("fDate" + i).innerHTML = weekday;
 
                     icon = document.createElement("img");
                     icon.src = "http://openweathermap.org/img/w/" + data["list"]["" + i]["weather"]["0"]["icon"] + ".png";
