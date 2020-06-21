@@ -98,6 +98,7 @@
         #fTemp1{
             font-size: 70%;
             margin-top: -2%;
+            margin-bottom: 2%;
         }
         #fTemp2{
             font-size: 70%;
@@ -112,11 +113,11 @@
             margin-left: 5%;
         }
         .second{
-            margin-top: -15.3%;
+            margin-top: -13.2%;
             margin-left: 35%;
         }
         .third{
-            margin-top: -15.5%;
+            margin-top: -13.5%;
             margin-left: 65%;
         }
     </style>
@@ -168,9 +169,11 @@
                 icon.width = 100;
                 document.getElementById("weatherIcon").appendChild(icon);
 
-                document.getElementById("temperature").innerHTML = data["main"]["temp"] + "°C";
-                document.getElementById("minMaxTemp").innerHTML = "min. " + data["main"]["temp_min"] + "°C"
-                    + "&nbsp; &nbsp; max. " + data["main"]["temp_max"] + "°C";
+                var mainTemp = Math.round(data["main"]["temp"]);
+
+                document.getElementById("temperature").innerHTML = mainTemp + "°C";
+                document.getElementById("minMaxTemp").innerHTML = "min. " + Math.round(data["main"]["temp_min"]) + "°C"
+                    + "&nbsp; &nbsp; max. " + Math.round(data["main"]["temp_max"]) + "°C";
                 document.getElementById("humidity").innerHTML = "Luftfeuchtigkeit: " + data["main"]["humidity"] + " %";
                 document.getElementById("visibility").innerHTML = "Sichtweite: " + data["visibility"] + " m";
                 document.getElementById("windspeed").innerHTML = "Windgeschwindigkeit: " + data["wind"]["speed"] + " m/s";
@@ -194,7 +197,8 @@
                     icon.width = 50;
                     document.getElementById("fIcon" + i).appendChild(icon);
 
-                    document.getElementById("fTemp" + i).innerHTML = data["list"]["" + i]["temp"]["min"] + "°C - " + data["list"]["" + i]["temp"]["max"] + "°C";
+                    document.getElementById("fTemp" + i).innerHTML = Math.round(data["list"]["" + i]["temp"]["min"]) + "°C - "
+                        + Math.round(data["list"]["" + i]["temp"]["max"]) + "°C";
                 }
 
 
