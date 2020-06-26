@@ -4,7 +4,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.inject.Inject;
-import javax.json.JsonValue;
+import javax.json.*;
 import javax.print.attribute.standard.Media;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -24,6 +24,8 @@ public class OpenWeatherMapResource {
     String apiKey;
 
     String tempUnit = "metric";
+
+    String website = "http://localhost:8080";
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -49,6 +51,26 @@ public class OpenWeatherMapResource {
         return Response
                 .ok(forecastByCity)
                 .build();
+    }
+
+    @GET
+    @Path("/leonieWeather")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getJsonForLeonie(@QueryParam("city") String city){
+        JsonValue weatherByCity = this.openWeatherMapService.getWeatherByCity(city,apiKey,tempUnit);
+
+        JsonObject response = weatherByCity.asJsonObject();
+        JsonArray weather = response.getJsonArray("weather");
+        JsonObject weatherObject = weather.getJsonObject(0);
+        String icon = "http://openweathermap.org/img/w/" + weatherObject.getString("icon") + ".png";
+
+        JsonObject weatherJson = Json.createObjectBuilder()
+                .add("Response", response)
+                .add("Icon", icon)
+                .add("Website", website)
+                .build();
+
+        return Response.ok(weatherJson).build();
     }
 
     @GET
