@@ -81,3 +81,13 @@ http://localhost:8080/openweather/forecast?city=Leonding&days=5
 Im JSON-Response wird eine Liste mitgegeben, mit dem Wetter von den angegebenen Tagen.
 
 image::./forecast.PNG[Wettervorhersage]
+
+== Response für Leonie
+
+Um den gewünschten Response für Leonie zu erhalten, muss man folgenden URL aufrufen:
+[source,cmd]
+----
+http://localhost:8080/debug-token/weather?city=Leonding
+----
+
+Dieser Response enthält den Response des aktuellen Wetters, den Link zum aktuellen Wetter-Icon und den Link zur Website.
